@@ -1,6 +1,6 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link href="static/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="static/js/bootstrap.min.js"></script>
+<script src="static/js/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
 
@@ -65,31 +65,18 @@
         </div>
       </div> -->
       <div class="jumbotron" style="text-align: center;">
-          <img src="static/iMAP.jpg" width="1200" height="640" alt="MAP" usemap="#iit_map">
-          <map name="iit_map">
-            <area shape="poly" coords="698,291,628,385,513,340,544,289,587,308,632,258" onclick="coet()">
-            <area shape="poly" coords="791,319,822,288,793,272,785,278,770,275,763,282,751,275,766,262,750,252,720,280" onclick="ced()">
-            <area shape="poly" coords="799,186,875,234,848,261,850,266,831,282,749,228,766,210,771,209" onclick="ced()">
-            <area shape="poly" coords="639,168,593,255,470,240,491,201,485,197,491,182,498,182,508,162,515,164,522,150" onclick ="coet_con()">
-            <area shape="poly" coords="472,150,497,164,437,260,413,247,420,235,412,231,423,216,431,216" onclick ="cbaa()">
-            <area shape="poly" coords="464,313,409,288,415,278,423,281,436,267,413,259,406,270,394,267,382,272,370,293,423,318,458,329" onclick ="cbaa_extension()">
-            <area shape="poly" coords="387,245,369,238,374,203,325,186,310,176,292,133,299,119,387,120,454,150,445,156,395,197" onclick ="cass()">
-            <area shape="poly" coords="377,249,345,230,276,187,261,192,220,228,224,247,199,268,222,284,234,315,280,348,318,325,364,276" onclick ="ids()">
-            <area shape="poly" coords="200,304,190,298,192,292,168,282,162,288,168,306,176,311,151,345,166,354" onclick ="admin()">
-            <area shape="poly" coords="202,316,211,314,283,360,248,410,168,360" onclick ="lawn()">
-            <area shape="poly" coords="291,368,298,359,328,371,320,382" onclick ="clinic()">
-            <area shape="poly" coords="402,404,394,423,527,468,539,452" onclick ="scs()">
-            <area shape="poly" coords="470,414,499,368,544,383,549,377,565,381,562,390,605,409,576,454" onclick ="csm()">
-            <area shape="poly" coords="765,446,779,429,785,431,792,417,786,416,800,397,732,367,698,415765,446,779,429,785,431,792,417,786,416,800,397,732,367,698,415" onclick ="gym()">
+        {{msg}}
 
-
-
-
-
-
+          <img src="static/iMAP.jpg" width="1200" height="640" alt="MAP" usemap="#iit_map" >
+          <map id="areas" name="iit_map">
+            {% for row in coords %}
+              <area shape="poly" coords='{{row["points"]}}' onclick='alert("{{row["name"]}}")'>
+   
+            {% endfor %}
 
 
           </map>
+          <button onclick="addlandmark() " style="color: lightblue;text-align: center;background: darkslategrey;width: unset;">ADD LANDMARK</button>
       </div>
 
             <!-- Services section -->
@@ -278,8 +265,16 @@
         </div>
       </section>
       <!-- ./Footer -->
-
+<script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
 <script>
+
+  function addlandmark(){
+    location.href = "/setpoints";
+  }
+
   function coet(){
     location.href = "/coet";
   }

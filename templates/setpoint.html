@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<script language="JavaScript">
+	var list = [];
+function point_it(event){
+	pos_x = event.offsetX?(event.offsetX):event.pageX-document.getElementById("pointer_div").offsetLeft;
+	pos_y = event.offsetY?(event.offsetY):event.pageY-document.getElementById("pointer_div").offsetTop;
+	document.getElementById("cross").style.left = (pos_x-1) ;
+	document.getElementById("cross").style.top = (pos_y-15) ;
+	document.getElementById("cross").style.visibility = "visible" ;
+	document.getElementById('xp').value = pos_x;
+	document.getElementById('yp').value = pos_y;
+	list.push(pos_x);
+	list.push(pos_y);
+	document.getElementById('points').value = list;
+
+}
+</script>
+</head>
+<body>
+<form name="{{url_for('map')}}" method="post">
+<img id="pointer_div" onclick="point_it(event)" style = "background-image:url('static/iMap.jpg');width:1200px;height:640px;">
+	<img src="point.gif" id="cross" style="position:relative;visibility:hidden;z-index:2;">
+
+You pointed on x = <input id="xp" type="text" name="form_x" size="4" /> - y = <input id="yp" type="text" name="form_y" size="4" />
+<br>
+	
+	<input type="text" placeholder="Name" name="name">
+	<input type="text" id="points" name="points" style="background-color: lightblue;">
+	<input type="text" placeholder="type" name="type">
+	<button>submit</button>
+</form> 
+</body>
+</html>

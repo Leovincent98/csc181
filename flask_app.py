@@ -1,10 +1,33 @@
 from flask import Flask, render_template
+from models import *
 
-app = Flask(__name__)
+
+
 
 @app.route('/',methods=['GET'])
 def index():
-	return render_template("home.html")
+	coords = Landmarks.query.all()
+	return render_template("home.html",coords = coords, msg="hello")
+
+@app.route('/setpoints',methods=['GET' , 'POST'])
+def setpoints():
+	coords = Landmarks.query.all()
+	if request.method == "POST":
+		namex  = request.form['name']
+		pointsx = request.form['points']
+		type_x = request.form['type']
+		
+		land = Landmarks(name = namex, points=str(pointsx), type_=type_x)
+		db.session.add(land)
+		db.session.commit()
+		coords = Landmarks.query.all()
+		return render_template('home.html',coords = coords, msg="hello")
+	
+	return render_template('setpoint.html')
+
+@app.route('/map',methods=['GET'])
+def map():
+	return render_template("setpoint.html")
 
 @app.route('/coet',methods=['GET'])
 def coet():
