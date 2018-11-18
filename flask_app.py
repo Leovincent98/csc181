@@ -7,7 +7,7 @@ from models import *
 @app.route('/',methods=['GET'])
 def index():
 	coords = Landmarks.query.all()
-	return render_template("home.html",coords = coords, msg="hello")
+	return render_template("index.html",coords = coords, msg="hello")
 
 @app.route('/setpoints',methods=['GET' , 'POST'])
 def setpoints():
@@ -21,7 +21,7 @@ def setpoints():
 		db.session.add(land)
 		db.session.commit()
 		coords = Landmarks.query.all()
-		return render_template('home.html',coords = coords, msg="hello")
+		return render_template('index.html',coords = coords, msg="hello")
 	
 	return render_template('setpoint.html')
 
