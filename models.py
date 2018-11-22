@@ -26,4 +26,35 @@ class Landmarks(db.Model):
 		self.points = points
 		self.type_ = type_
 
+class Rooms(db.Model):
+	room_id = db.Column(db.Integer, primary_key = True)
+	floor_id = db.Column(db.Integer, db.ForeignKey('floors.floor_id'))
+	room_num = db.Column(db.String(10), unique = True)
+
+
+	def __init__(self, floor_id, room_num):
+		self.floor_num = floor_num
+		self.room_num = room_num
+
+class Floors(db.Model):
+	floor_id = db.Column(db.Integer, primary_key = True)
+	floor_landmark = db.Column(db.String(10), unique = True)
+	rf_id = db.relationship("Rooms", uselist =False, backref = "floor_room")
+
+
+	def __init__(self, floor_num, room_num):
+		self.floor_num = floor_num
+		self.room_num = room_num
+
+class Roommarks(db.Model):
+	room_id =  db.Column(db.Integer, primary_key=True)
+	room_name = db.Column(db.String(50), unique=True)
+	points = db.Column(db.String(200), unique=True)
+	floor_num= db.Column(db.String(100))
+
+	def __init__(self, room_name, points, floor_num):
+		self.room_name = room_name
+		self.points = points
+		self.floor_num = floor_num
+
 db.create_all()
