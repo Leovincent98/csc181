@@ -18,6 +18,11 @@ def do_admin_login():
     else:
         flash('wrong password!')
     return home()
+
+app.route('/landmark')
+def landmark(name):
+    if not session.get('logged_in'):
+        return render_template("landmarkbase.html")
  
 if __name__ == "__main__":
     app.secret_key = os.urandom(12)
