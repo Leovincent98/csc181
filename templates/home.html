@@ -21,56 +21,15 @@
 
     <nav class="navbar navbar-expand-sm  navbar-dark ">
 
-  <!-- Links -->
-<!--   <ul class="navbar-nav container ">
-    <li class="nav-item" style="margin-left:-20px;font-size:30px">
-    <a class="nav-link" href="#">TRAVEL TRIP</a>
-  </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">HOMEPAGE</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">ABOUT US</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">SERVICES</a>
-    </li>
-    <li class="nav-item">
-     <a class="nav-link" href="#">CONTACTS</a>
-    </li> -->
-
-    <!-- Dropdown -->
-<!--     <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-        MORE
-      </a>
-      <div class="dropdown-menu">
-        <a class="dropdown-item" href="#">Link 1</a>
-        <a class="dropdown-item" href="#">Link 2</a>
-        <a class="dropdown-item" href="#">Link 3</a>
-      </div>
-    </li>
-  </ul>
-</nav> -->
-
-
     <main role="main">
 
-      <!-- Main jumbotron for a primary marketing message or call to action -->
-<!--       <div class="jumbotron" background="bgimage.jpg">
-        <div class="container">
-          <h1 class="display-3">Travel the World!</h1>
-          <p>Wherever you go , go with all your heart.</p>
-          <button class="button" href="#" role="button"><span>Learn more</span> </button>
-        </div>
-      </div> -->
       <div class="jumbotron" style="text-align: center;">
-        {{msg}}
+      
 
           <img src="static/iMAP.jpg" width="1200" height="640" alt="MAP" usemap="#iit_map" >
           <map id="areas" name="iit_map">
             {% for row in coords %}
-              <area shape="poly" coords='{{row["points"]}}' onclick='alert("{{row["name"]}}")'>
+              <area shape="poly" coords='{{row["points"]}}' href="/landmark/{{row['land_id']}}">
    
             {% endfor %}
 
@@ -211,60 +170,6 @@
 
 <hr>
     </main>
-
-
-
-    <!-- Footer -->
-      <section id="footer">
-        <div class="container">
-          <div class="row text-center text-xs-center text-sm-left text-md-left">
-            <div class="col-xs-12 col-sm-4 col-md-4">
-              <h5>Quick links</h5>
-              <ul class="list-unstyled quick-links">
-                <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Home</a></li>
-                <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>About</a></li>
-                <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>FAQ</a></li>
-                <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Get Started</a></li>
-                <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Videos</a></li>
-              </ul>
-            </div>
-            <div class="col-xs-12 col-sm-4 col-md-4">
-              <h5>Quick links</h5>
-              <ul class="list-unstyled quick-links">
-                <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Home</a></li>
-                <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>About</a></li>
-                <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>FAQ</a></li>
-                <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Get Started</a></li>
-                <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Videos</a></li>
-              </ul>
-            </div>
-            <div class="col-xs-12 col-sm-4 col-md-4">
-              <h5>Quick links</h5>
-              <ul class="list-unstyled quick-links">
-                <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Home</a></li>
-                <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>About</a></li>
-                <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>FAQ</a></li>
-                <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Get Started</a></li>
-                <li><a href="https://wwwe.sunlimetech.com" title="Design and developed by"><i class="fa fa-angle-double-right"></i>Imprint</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">
-              <ul class="list-unstyled list-inline social text-center">
-                <li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-facebook"></i></a></li>
-                <li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-twitter"></i></a></li>
-                <li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-instagram"></i></a></li>
-                <li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-google-plus"></i></a></li>
-                <li class="list-inline-item"><a href="javascript:void();" target="_blank"><i class="fa fa-envelope"></i></a></li>
-              </ul>
-            </div>
-            </hr>
-          </div>
-
-        </div>
-      </section>
-      <!-- ./Footer -->
 <script
   src="https://code.jquery.com/jquery-3.3.1.js"
   integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
@@ -274,48 +179,9 @@
   function addlandmark(){
     location.href = "/setpoints";
   }
+  function addFloors(){
+    location.href = "/setpoints"
+  }
 
-  function coet(){
-    location.href = "/coet";
-  }
-  function ced(){
-    location.href = "/ced";
-  }
-  function coet_con(){
-    location.href = "/coet_con"
-  }
-  function cbaa(){
-    location.href = "/cbaa"
-  }
-  function cass(){
-    location.href = "/cass";
-  }
-  function cbaa_extension(){
-    location.href = "/cbaa_extension";
-  }
-  function scs(){
-    location.href = "/scs"
-  }
-  function clinic(){
-    location.href = "/clinic"
-  }
-  function ids(){
-    location.href = "/ids";
-  }
-  function lawn(){
-    location.href = "/lawn";
-  }
-  function gym(){
-    location.href = "/gym"
-  }
-  function csm(){
-    location.href = "/csm"
-  }
-  function admin(){
-    location.href = "/admin"
-  }
-  function clinic(){
-    location.href = "/clinic"
-  }
 
 </script>
