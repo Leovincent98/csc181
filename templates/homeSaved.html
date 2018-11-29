@@ -3,96 +3,9 @@
 <script src="static/js/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
-<style>
-*{margin:0px; padding:0px; font-family:Helvetica, Arial, sans-serif;}
-
-/* Full-width input fields */
-input[type=text], input[type=password] {
-    width: 90%;
-    padding: 12px 20px;
-    margin: 8px 26px;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-  font-size:16px;
-}
-
-/* Set a style for all buttons */
-button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 26px;
-    border: none;
-    cursor: pointer;
-    width: 90%;
-  font-size:20px;
-}
-button:hover {
-    opacity: 0.8;
-}
-
-/* Center the image and position the close button */
-.imgcontainer {
-    text-align: center;
-    margin: 24px 0 12px 0;
-    position: relative;
-}
-.avatar {
-    width: 200px;
-  height:200px;
-    border-radius: 50%;
-}
-
-/* The Modal (background) */
-.modal {
-  display:none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.4);
-}
-
-/* Modal Content Box */
-.modal-content {
-    background-color: #fefefe;
-    margin: 4% auto 15% auto;
-    border: 1px solid #888;
-    width: 40%; 
-  padding-bottom: 30px;
-}
-
-/* The Close Button (x) */
-.close {
-    position: absolute;
-    right: 25px;
-    top: 0;
-    color: #000;
-    font-size: 35px;
-    font-weight: bold;
-}
-.close:hover,.close:focus {
-    color: red;
-    cursor: pointer;
-}
-
-/* Add Zoom Animation */
-.animate {
-    animation: zoom 0.6s
-}
-@keyframes zoom {
-    from {transform: scale(0)} 
-    to {transform: scale(1)}
-}
 
 
-
-</style>
-
+<body background="../static/background.jpg">
 
     <nav class="navbar navbar-expand-sm bg-light justify-content-center">
       <ul class="navbar-nav">
@@ -114,44 +27,31 @@ button:hover {
     <main role="main">
 
       <section class="content">
-         
+         <div class="body">
+            <body background="../static/background.jpg">
+                <button type="button" class="btn btn-default waves-effect" onclick="activateUpdateMap()" data-toggle="modal" data-target="#smallModal">Click before updating map</button>
+
+                <button type="button" class="btn btn-default waves-effect" onclick="updateMap()" data-toggle="modal" data-target="#smallModal">Update Map</button>
+
+
+          </div>
+
                        
                         
 
-      <div  style="text-align: center;">
+      <div class="jumbotron" style="text-align: center;">
       
 
-          <img src="../static/iMap.png" width="1200" height="640" alt="MAP" usemap="#iit_map" >
+          <img src="static/iMAP.jpg" width="1200" height="640" alt="MAP" usemap="#iit_map" >
           <map id="areas" name="iit_map">
             {% for row in coords %}
               <area shape="poly" coords='{{row["points"]}}' href="/landmark/{{row['land_id']}}">
    
             {% endfor %}
 
+
           </map>
-          <button onclick="document.getElementById('modal-wrapper').style.display='block'" style="color: lightblue;text-align: center;background: darkslategrey;width: unset;">Edit Map</button>
-          
-
-          <div id="modal-wrapper" class="modal">
-  
-          <form class="modal-content animate" action="/setpoints">
-                
-            <div class="imgcontainer">
-              <span onclick="document.getElementById('modal-wrapper').style.display='none'" class="close" title="Close PopUp">&times;</span>
-              <img src="../static/avatar.png" alt="Avatar" class="avatar">
-              <h1 style="text-align:center">iMap</h1>
-            </div>
-
-            <div class="container">
-              <input type="text" placeholder="Enter Email" name="uname">
-              <input type="password" placeholder="Enter Password" name="psw">        
-              <button type="submit">Submit</button>
-              
-            </div>
-            
-          </form>
-          
-        </div>
+          <button onclick="addlandmark() " style="color: lightblue;text-align: center;background: darkslategrey;width: unset;">Edit Feature</button>
       </div>
 
             <!-- Services section -->
@@ -192,21 +92,56 @@ button:hover {
                 </div>
               <!-- /Services section -->
 </section>
+<hr>
+
+      <div class="container">
+        <!-- Example row of columns -->
+        <h2 class="text-center">Colleges</h2>
+
+        <div class="row" >
+          <div class=" card col-md-3" style="margin:30px;">
+            <img src = "static/coet.jpg" height="200px" width="100%">
+            <P>CO-ET</P>
+            <p><a class="button" href="#" role="button">View details</a></p>
+          </div>
+          <div class=" card col-md-3" style="margin:30px;">
+            <img src = "static/coet_con.png" height="200px" width="100%">
+            <p>CO-ET / CON</p>
+            <p><a class="button" href="#" role="button">View details</a></p>
+          </div>
+          <div class="card col-md-3" style="margin:30px;">
+            <img src = "static/scs.jpg" height="200px" width="100%">
+            <P>SCS</P>
+            <p><a class="button" href="#" role="button">View details </a></p>
+
+          </div>
+        </div>
+
+        <div class="row" >
+          <div class=" card col-md-3" style="margin:30px;">
+            <img src = "static/cbaa.png" height="200px" width="100%">
+            <P>CBAA</P>
+            <p><a class="button" href="#" role="button">View details</a></p>
+          </div>
+          <div class=" card col-md-3" style="margin:30px;">
+            <img src = "static/csm.jpg" height="200px" width="100%">
+            <p>CSM</p>
+            <p><a class="button" href="#" role="button">View details</a></p>
+          </div>
+          <div class="card col-md-3" style="margin:30px;">
+            <img src = "static/gym.jpg" height="200px" width="100%">
+            <P>GYM</P>
+            <p><a class="button" href="#" role="button">View details </a></p>
+
+          </div>
+        </div>
+
+
+<br>
 </div> <!-- /container -->
 
 
     </main>
-<script>
-// If user clicks anywhere outside of the modal, Modal will close
-
-var modal = document.getElementById('modal-wrapper');
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
-</script>
-
 <script
   src="https://code.jquery.com/jquery-3.3.1.js"
   integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="

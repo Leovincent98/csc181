@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+<script language="JavaScript">
+	var list = [];
+function point_it(event){
+	pos_x = event.offsetX?(event.offsetX):event.pageX-document.getElementById("pointer_div").offsetLeft;
+	pos_y = event.offsetY?(event.offsetY):event.pageY-document.getElementById("pointer_div").offsetTop;
+	document.getElementById("cross").style.left = (pos_x-1) ;
+ 	document.getElementById("cross").style.top = (pos_y-15) ;
+	document.getElementById("cross").style.visibility = "visible" ;
+	document.getElementById('xp').value = pos_x;
+	document.getElementById('yp').value = pos_y;
+	list.push(pos_x);
+	list.push(pos_y);
+	document.getElementById('points').value = list;
+
+}
+</script>
+</head>
+<body>
+<form name="{{url_for('map')}}" method="post">
+<br><br>
+<button type="button" class="btn btn-default waves-effect" onclick="home()" data-toggle="modal" data-target="#smallModal">Home</button>
+ <section class="content">
+         <div class="body">
+
+         	
+            
+                
+
+                <button type="button" class="btn btn-default waves-effect" onclick="updateMap()" data-toggle="modal" data-target="#smallModal">Update Map</button>
+
+
+          </div>
+<div  style="text-align: center;">
+<img id="pointer_div" onclick="point_it(event)" style = "background-image:url('static/iMap.png');width:1200px;height:640px;">
+	<img src="point.gif" id="cross" style="position:relative;visibility:hidden;z-index:2;">
+<br>
+You pointed on x = <input id="xp" type="text" name="form_x" size="4" /> - y = <input id="yp" type="text" name="form_y" size="4" />
+<br>
+	
+	<input type="text" placeholder="Name" name="name">
+	<input type="text" id="points" name="points" style="background-color: lightblue;">
+	<input type="text" placeholder="type" name="type">
+	<button>submit</button>
+</div>
+</form> 
+</body>
+</html>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+<script>
+
+  function addlandmark(){
+    location.href = "/setpoints";
+  }
+ 
+function activateUpdateMap(){
+    location.href = "/activateUpdateMap";
+  }
+function updateMap(){
+    location.href = "/update";
+  }
+function home(){
+      location.href = "http://127.0.0.1:5000/";
+    }
+</script>
