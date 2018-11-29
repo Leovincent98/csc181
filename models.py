@@ -6,7 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] ="postgresql://postgres:postgres@localhost/map"
+app.config['SQLALCHEMY_DATABASE_URI'] ="postgresql://postgres:postgres@localhost:5432/map"
 app.config['SECRET_KEY'] = 'veryhard'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['USE_SESSION_FOR_NEXT'] = True
@@ -14,6 +14,16 @@ app.secret_key = os.urandom(24)
 app.debug = True
 db = SQLAlchemy(app)
 
+
+class Login(db.Model):
+	user_id=  db.Column(db.Integer, primary_key=True)
+	username = db.Column(db.String(50), unique=True)
+	password = db.Column(db.String(200), unique=True)
+
+	def __init__(self, user_id, username, password):
+		self.user_id = user_id
+		self.username = username
+		self.password = password
 
 class Landmarks(db.Model):
 	land_id =  db.Column(db.Integer, primary_key=True)

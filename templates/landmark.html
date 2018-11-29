@@ -1,13 +1,155 @@
 <!DOCTYPE html>
+<!--
+Template Name: Mudcappro
+Author: <a href="http://www.os-templates.com/">OS Templates</a>
+Author URI: http://www.os-templates.com/
+Licence: Free to use under our free template licence terms
+Licence URI: http://www.os-templates.com/template-terms
+-->
 <html>
 <head>
-	<title>map</title>
+<title>iMap - {{land.name}}</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link href="styles/layout.css" rel="stylesheet" type="text/css" media="all">
 </head>
-<body>
-	<h1 style="text-align: center;">this is {{college}}</h1>
-	 <div>
-		
-	</div>
+<body id="top">
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<div class="wrapper row1">
+  <header id="header" class="hoc clear"> 
+    <!-- ################################################################################################ -->
+    <div id="logo" class="fl_left">
+      <h1><a href="index1.html">iMap</a></h1>
+    </div>
+  </header>
 </div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- Top Background Image Wrapper -->
+<div class="wrapper bgded overlay coloured" style="background-image:url('images/demo/backgrounds/01.png');"> 
+  <!-- ################################################################################################ -->
+  <div class="wrapper row2">
+    <nav id="mainav" class="hoc clear"> 
+      <ul class="clear">
+        <li class="active"><a href="index1.html">Home</a></li>
+        <li><a href="/templates/index.html">Landmarks</a></li>
+        <li><a href="index1.html">Events</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div id="pageintro" class="hoc clear"> 
+    <h1 style="text-align: center;">welcome to {{land.name}}</h1>
+        <li>
+           <div class="jumbotron" style="text-align: center;">
+            <img src="static/iMAP.jpg" width="1200" height="640" alt="MAP" usemap="#iit_map" >
+             <map id="areas" name="iit_map">
+            {% for row in coords %}
+              <area shape="poly" coords='{{row["points"]}}' href="/landmark/{{row['land_id']}}">
+            {% endfor %}
+          </map>
+          <button onclick="addlandmark() " style="color: white;text-align: center;background:maroon;width: unset;" class="btn">ADD LANDMARK</button>
+      </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!--###Colleges###-->
+<div class="wrapper row3">
+  <section class="hoc container clear"> 
+    <div class="sectiontitle">
+      <h6 class="heading">COLLEGES</h6>
+      <p>View your college virtually</p>
+    </div>
+
+    {% for a in lands %}
+{% if a != land %}
+<div class="group elements">
+      <article class="one_quarter first"><a href="#"><img src="images/demo/320x220.png" alt=""></a>
+        <div class="txtwrap">
+          <h4 class="heading">{{land.name}}</h4>
+          <p></p>
+          <footer><a href="/landmark/{{row['land_id']}}">View &raquo;</a></footer>
+        </div>
+      </article>
+{% and if %}
+    {% endfor %}
+<!-- ###Events### -->
+<div class="wrapper bgded overlay coloured">
+  <section class="hoc container clear"> 
+    <div class="sectiontitle">
+      <h6 class="heading">EVENTS</h6>
+      <p>what's up IIT?</p>
+    </div>
+    <div class="group elements">
+      <article class="one_third first">
+        <figure><a href="#"><img src="images/demo/320x220.png" alt=""></a>
+          <figcaption>
+            <time datetime="2045-04-06T08:15+00:00"><strong>06</strong> <em>Apr</em></time>
+          </figcaption>
+        </figure>
+        <div class="txtwrap">
+          <h4 class="heading">Augue lacussed purus</h4>
+          <ul class="nospace meta">
+            <li>by <a href="#">Admin</a></li>
+            <li>in <a href="#">Category Name</a></li>
+          </ul>
+          <p>Aliquet fermentum magna nullam tincidunt suspendisse nisl eleifend vulputate fusce nec augue at erat non libero accumsan [&hellip;]</p>
+          <footer><a href="#">Read More &raquo;</a></footer>
+        </div>
+      </article>
+      <article class="one_third">
+        <figure><a href="#"><img src="images/demo/320x220.png" alt=""></a>
+          <figcaption>
+            <time datetime="2018-11-26"><strong>05</strong> <em>Apr</em></time>
+          </figcaption>
+        </figure>
+        <div class="txtwrap">
+          <h4 class="heading">Neque lacinia ac blandit</h4>
+          <ul class="nospace meta">
+            <li>by <a href="#">Admin</a></li>
+            <li>in <a href="#">Category Name</a></li>
+          </ul>
+          <p>Scelerisque morbi lacinia sagittis mauris phasellus in magna donec sit amet nisi suspendisse vestibulum lectus imperdiet sagittis [&hellip;]</p>
+          <footer><a href="#">Read More &raquo;</a></footer>
+        </div>
+      </article>
+      <article class="one_third">
+        <figure><a href="#"><img src="images/demo/320x220.png" alt=""></a>
+          <figcaption>
+            <time datetime="2045-04-04T08:15+00:00"><strong>04</strong> <em>Apr</em></time>
+          </figcaption>
+        </figure>
+        <div class="txtwrap">
+          <h4 class="heading">Vivamus tortor praesent</h4>
+          <ul class="nospace meta">
+            <li>by <a href="#">Admin</a></li>
+            <li>in <a href="#">Category Name</a></li>
+          </ul>
+          <p>Velit in hac habitasse platea dictumst donec eget ligula nam leo lacus pharetra in blandit a tincidunt ut leo duis augue pulvinar [&hellip;]</p>
+          <footer><a href="#">Read More &raquo;</a></footer>
+        </div>
+      </article>
+    </div>
+    <!-- ###############################FOOTER################################################################# -->
+    <div class="clear"></div>
+  </section>
+
+  <div class="wrapper row5">
+    <div id="copyright" class="hoc clear"> 
+    </div>
+  </div>
+
+</div>
+<a id="backtotop" href="#top"><i class="fa fa-chevron-up"></i></a>
+<!-- JAVASCRIPTS -->
+<script src="scripts/jquery.min.js"></script>
+<script src="scripts/jquery.backtotop.js"></script>
+<script src="scripts/jquery.mobilemenu.js"></script>
+<script src="scripts/jquery.flexslider-min.js"></script>
 </body>
 </html>
