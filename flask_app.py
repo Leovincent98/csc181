@@ -1,19 +1,33 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, url_for, flash, redirect
+from forms import LoginForm
 from models import *
+import os
 
+app = Flask(__name__)
+app.config['SECRET_KEY'] = 'veryhard'
 
-
-
-@app.route('/',methods=['GET'])
+@app.route('/',methods=['GET', 'POST'])
 def index():
 	coords = Landmarks.query.all()
-	return render_template("index.html",coords = coords, msg="hello")
+	return render_template("home.html",coords = coords, msg="hello")
+
+@app.route("/login", methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        if form.email.data == 'admin@mail.com' and form.password.data == 'password':
+            flash('You have been logged in!', 'success')
+            return redirect(url_for('home'))
+        else:
+            flash('Login Unsuccessful. Please check username and password', 'danger')
+    return render_template('login.html', title='Login', form=form)
 
 @app.route('/setpoints',methods=['GET' , 'POST'])
 def setpoints():
 	coords = Landmarks.query.all()
 	if request.method == "POST":
 		namex  = request.form['name']
+
 		pointsx = request.form['points']
 		type_x = request.form['type']
 		
@@ -21,65 +35,54 @@ def setpoints():
 		db.session.add(land)
 		db.session.commit()
 		coords = Landmarks.query.all()
-		return render_template('index.html',coords = coords, msg="hello")
+		return render_template('home.html',coords = coords, msg="hello")
 	
-	return render_template('setpoint.html')
+	return render_template('setpoints.html')
+
+
+
+@app.route('/activateUpdateMap', methods=['GET'])
+def activateUpdateMap():
+	os.system('python updateFloors.py')
+
+@app.route('/upload', methods=['GET'])
+def activate():
+	return render_template("upload.html")
 
 @app.route('/map',methods=['GET'])
-def map():
-	return render_template("setpoint.html")
+def home():
+	return render_template("home.html")
 
-@app.route('/coet',methods=['GET'])
-def coet():
-	return render_template("coet.html")
+@app.route('/landmark/<id>',methods=['GET'])
+def landmark(id):
+	land = Landmarks.query.filter_by(land_id=id).first()
+	return render_template("landmark.html", land=land)
 
-@app.route('/ced',methods=['GET'])
-def ced():
-	return render_template("ced.html")
+APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 
-@app.route('/coet_con',methods=['GET'])
-def coet_con():
-	return render_template("coet_con.html")
+@app.route("/upload", methods=['POST'])
+def upload():
+    target = os.path.join(APP_ROOT, 'C:\Users\kaju\Desktop\csc181\static')
+    print(target)
 
-@app.route('/cbaa',methods=['GET'])
-def cbaa():
-	return render_template("cbaa.html")
+    if not os.path.isdir(target):
+        os.mkdir(target)
 
-@app.route('/csm',methods=['GET'])
-def csm():
-	return render_template("csm.html")
+    for file in request.files.getlist("file"):
+        print(file)
+        filename = file.filename
+        destination = "/".join([target, filename])
+        print(destination)
+        file.save(destination)
+  
+    return render_template("complete.html")
 
-@app.route('/gym',methods=['GET'])
-def gym():
-	return render_template("gym.html")
+@app.route("/update", methods=['GET'])
+def update():
+    return render_template("upload.html")
 
-@app.route('/scs',methods=['GET'])
-def scs():
-	return render_template("scs.html")
 
-@app.route('/ids',methods=['GET'])
-def ids():
-	return render_template("ids.html")
 
-@app.route('/lawn',methods=['GET'])
-def lawn():
-	return render_template("lawn.html")
-
-@app.route('/admin',methods=['GET'])
-def admin():
-	return render_template("admin.html")
-
-@app.route('/cass',methods=['GET'])
-def cass():
-	return render_template("cass.html")
-
-@app.route('/cbaa_extension',methods=['GET'])
-def cbaa_extension():
-	return render_template("cbaa_extension.html")
-
-@app.route('/clinic',methods=['GET'])
-def clinic():
-	return render_template("clinic.html")
 
 if __name__ == '__main__':
 	app.run(debug=True)
